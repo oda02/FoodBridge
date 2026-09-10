@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ru.kukakur.foodbridge",
+      "sha256_cert_fingerprints": [
+        "D1:F8:D3:D2:ED:BB:C4:99:00:0F:8A:8F:B9:D2:47:83:C1:0B:1E:67:17:FA:4C:0F:C9:A4:36:92:79:9E:97:0F"
+      ]
+    }
+  }
+]

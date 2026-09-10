@@ -1,0 +1,11 @@
+# Тестовая ссылка
+
+https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6InRlc3QtMDAxIiwibmFtZSI6ItCi0LLQvtGA0L7QsyArINCx0LDQvdCw0L0iLCJrY2FsIjo0MzAsInAiOjMzLCJmIjoxNiwiYyI6NDIsIm1lYWwiOiJzbmFjayIsInRpbWUiOiIyMDI2LTA5LTA5VDIxOjMwOjAwKzAzOjAwIn1dfQ
+
+[Добавить в Google Health](https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6InRlc3QtMDAxIiwibmFtZSI6ItCi0LLQvtGA0L7QsyArINCx0LDQvdCw0L0iLCJrY2FsIjo0MzAsInAiOjMzLCJmIjoxNiwiYyI6NDIsIm1lYWwiOiJzbmFjayIsInRpbWUiOiIyMDI2LTA5LTA5VDIxOjMwOjAwKzAzOjAwIn1dfQ)
+
+```markdown
+[Добавить в Google Health](https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6InRlc3QtMDAxIiwibmFtZSI6ItCi0LLQvtGA0L7QsyArINCx0LDQvdCw0L0iLCJrY2FsIjo0MzAsInAiOjMzLCJmIjoxNiwiYyI6NDIsIm1lYWwiOiJzbmFjayIsInRpbWUiOiIyMDI2LTA5LTA5VDIxOjMwOjAwKzAzOjAwIn1dfQ)
+```
+
+Тестовые данные: Творог + банан, 430 kcal, 9 сентября 2026, 21:30 UTC+03:00. ID `test-001` — если запись уже добавляли, дубликат не создаётся.

@@ -1,0 +1,825 @@
+[
+  {
+    "label": "valid single upsert Unicode",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid complete original example",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6ImV4YW1wbGUtb2F0bWVhbC0yMDI2MDkxMS0wMDEiLCJuYW1lIjoi0J7QstGB0Y_QvdC60LAg0YEg0Y_Qs9C-0LTQsNC80Lgg8J-loyIsImtjYWwiOjM1Mi41LCJ0aW1lIjoiMjAyNi0wOS0xMVQwOTowMDowMCswMzowMCIsInAiOjEyLjQsImYiOjguMSwiYyI6NTQuMCwiZmliZXIiOjcuMiwic3VnYXIiOjkuNiwic2F0dXJhdGVkRmF0IjoxLjgsInNvZGl1bU1nIjoxMjUsIm1lYWwiOiJicmVha2Zhc3QifV19",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "example-oatmeal-20260911-001",
+        "rev": 1,
+        "name": "Овсянка с ягодами 🥣"
+      }
+    ]
+  },
+  {
+    "label": "valid single delete",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6Mn1dfQ",
+    "expectedOperations": [
+      {
+        "op": "delete",
+        "id": "meal-2",
+        "rev": 2
+      }
+    ]
+  },
+  {
+    "label": "valid two deletes",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0zIiwicmV2IjoxMDAwMDAwfV19",
+    "expectedOperations": [
+      {
+        "op": "delete",
+        "id": "meal-2",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-3",
+        "rev": 1000000
+      }
+    ]
+  },
+  {
+    "label": "valid mixed operations",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6Mn0seyJvcCI6InVwc2VydCIsImlkIjoibWVhbC0zIiwibmFtZSI6ItCh0YPQvyDwn42yIiwia2NhbCI6MTI1LjUsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIiwicmV2IjozfV19",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      },
+      {
+        "op": "delete",
+        "id": "meal-2",
+        "rev": 2
+      },
+      {
+        "op": "upsert",
+        "id": "meal-3",
+        "rev": 3,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid twenty operations",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xIiwicmV2IjoyfSx7Im9wIjoiZGVsZXRlIiwiaWQiOiJtZWFsLTIiLCJyZXYiOjJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMyIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC00IiwicmV2IjoyfSx7Im9wIjoiZGVsZXRlIiwiaWQiOiJtZWFsLTUiLCJyZXYiOjJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtNiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC03IiwicmV2IjoyfSx7Im9wIjoiZGVsZXRlIiwiaWQiOiJtZWFsLTgiLCJyZXYiOjJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtOSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMyIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNyIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xOCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xOSIsInJldiI6Mn1dfQ",
+    "expectedOperations": [
+      {
+        "op": "delete",
+        "id": "meal-0",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-1",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-2",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-3",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-4",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-5",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-6",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-7",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-8",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-9",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-10",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-11",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-12",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-13",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-14",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-15",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-16",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-17",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-18",
+        "rev": 2
+      },
+      {
+        "op": "delete",
+        "id": "meal-19",
+        "rev": 2
+      }
+    ]
+  },
+  {
+    "label": "valid explicit revision one",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MX1dfQ",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid edit revision two",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6Mn1dfQ",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 2,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid maximum revision",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MTAwMDAwMH1dfQ",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1000000,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid zero nutrients",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjAsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIiwicCI6MCwiZiI6MCwiYyI6MCwic29kaXVtTWciOjB9XX0",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid maximum nutrients",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjIwMDAwLCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInAiOjUwMDAsInNvZGl1bU1nIjoxMDAwMDB9XX0",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid fractional negative offset",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1Ni4xMjM0NTY3ODktMDQ6MzAifV19",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid explicit UTC",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NloifV19",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid escaped Unicode",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6IFt7Im9wIjogInVwc2VydCIsICJpZCI6ICJtZWFsLTEiLCAibmFtZSI6ICJcdTA0MjFcdTA0NDNcdTA0M2YgXHVkODNjXHVkZjcyIiwgImtjYWwiOiAxMjUuNSwgInRpbWUiOiAiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "Суп 🍲"
+      }
+    ]
+  },
+  {
+    "label": "valid escaped quotes and braces",
+    "valid": true,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiJxdW90ZWQgXCJuYW1lXCIgYW5kIHt9IFtdIiwia2NhbCI6MTI1LjUsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ",
+    "expectedOperations": [
+      {
+        "op": "upsert",
+        "id": "meal-1",
+        "rev": 1,
+        "name": "quoted \"name\" and {} []"
+      }
+    ]
+  },
+  {
+    "label": "missing required upsert op",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3siaWQiOiJtZWFsLTEiLCJuYW1lIjoi0KHRg9C_IPCfjbIiLCJrY2FsIjoxMjUuNSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "missing required upsert id",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJuYW1lIjoi0KHRg9C_IPCfjbIiLCJrY2FsIjoxMjUuNSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "missing required upsert name",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "missing required upsert kcal",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ"
+  },
+  {
+    "label": "missing required upsert time",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41fV19"
+  },
+  {
+    "label": "invalid upsert kcal -0.1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOi0wLjEsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ"
+  },
+  {
+    "label": "invalid upsert kcal 20000.1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjIwMDAwLjEsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ"
+  },
+  {
+    "label": "invalid upsert p 5001",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInAiOjUwMDF9XX0"
+  },
+  {
+    "label": "invalid upsert sodiumMg 100001",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInNvZGl1bU1nIjoxMDAwMDF9XX0"
+  },
+  {
+    "label": "invalid upsert p None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInAiOm51bGx9XX0"
+  },
+  {
+    "label": "invalid upsert p '12'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInAiOiIxMiJ9XX0"
+  },
+  {
+    "label": "invalid upsert meal 'brunch'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsIm1lYWwiOiJicnVuY2gifV19"
+  },
+  {
+    "label": "invalid upsert name ''",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiIiLCJrY2FsIjoxMjUuNSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "invalid upsert id ''",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6IiIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid upsert name '\\u202eevil'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLigK5ldmlsIiwia2NhbCI6MTI1LjUsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ"
+  },
+  {
+    "label": "invalid upsert name 'bad\\nname'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiJiYWRcbm5hbWUiLCJrY2FsIjoxMjUuNSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "invalid upsert unknown 1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInVua25vd24iOjF9XX0"
+  },
+  {
+    "label": "invalid upsert v 1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInYiOjF9XX0"
+  },
+  {
+    "label": "invalid upsert kcal {}",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOnt9LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid upsert p []",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInAiOltdfV19"
+  },
+  {
+    "label": "invalid upsert time '2020-01-15T12:34:56'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiJ9XX0"
+  },
+  {
+    "label": "invalid upsert time '2021-02-29T00:00:00Z'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMS0wMi0yOVQwMDowMDowMFoifV19"
+  },
+  {
+    "label": "invalid upsert time '2020-01-15T12:34:56+19:00'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NisxOTowMCJ9XX0"
+  },
+  {
+    "label": "invalid upsert time '1969-12-31T23:59:59Z'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMTk2OS0xMi0zMVQyMzo1OTo1OVoifV19"
+  },
+  {
+    "label": "invalid upsert op 'add'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJhZGQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid upsert op None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOm51bGwsImlkIjoibWVhbC0xIiwibmFtZSI6ItCh0YPQvyDwn42yIiwia2NhbCI6MTI1LjUsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ"
+  },
+  {
+    "label": "invalid upsert revision 0",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MH1dfQ"
+  },
+  {
+    "label": "invalid upsert revision -1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6LTF9XX0"
+  },
+  {
+    "label": "invalid upsert revision 1000001",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MTAwMDAwMX1dfQ"
+  },
+  {
+    "label": "invalid upsert revision 1.0",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MS4wfV19"
+  },
+  {
+    "label": "invalid upsert revision '2'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6IjIifV19"
+  },
+  {
+    "label": "invalid upsert revision None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6bnVsbH1dfQ"
+  },
+  {
+    "label": "invalid upsert revision True",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6dHJ1ZX1dfQ"
+  },
+  {
+    "label": "invalid upsert revision []",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6W119XX0"
+  },
+  {
+    "label": "invalid upsert revision {}",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6e319XX0"
+  },
+  {
+    "label": "invalid upsert revision 9223372036854775808",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6OTIyMzM3MjAzNjg1NDc3NTgwOH1dfQ"
+  },
+  {
+    "label": "invalid delete revision 0",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6MH1dfQ"
+  },
+  {
+    "label": "invalid delete revision 1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6MX1dfQ"
+  },
+  {
+    "label": "invalid delete revision -1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6LTF9XX0"
+  },
+  {
+    "label": "invalid delete revision 1000001",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6MTAwMDAwMX1dfQ"
+  },
+  {
+    "label": "invalid delete revision 2.0",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6Mi4wfV19"
+  },
+  {
+    "label": "invalid delete revision '2'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6IjIifV19"
+  },
+  {
+    "label": "invalid delete revision None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6bnVsbH1dfQ"
+  },
+  {
+    "label": "invalid delete revision True",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6dHJ1ZX1dfQ"
+  },
+  {
+    "label": "missing required delete op",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3siaWQiOiJtZWFsLTIiLCJyZXYiOjJ9XX0"
+  },
+  {
+    "label": "missing required delete id",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJyZXYiOjJ9XX0"
+  },
+  {
+    "label": "missing required delete rev",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiJ9XX0"
+  },
+  {
+    "label": "invalid delete name 'forbidden'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6MiwibmFtZSI6ImZvcmJpZGRlbiJ9XX0"
+  },
+  {
+    "label": "invalid delete id ''",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6IiIsInJldiI6Mn1dfQ"
+  },
+  {
+    "label": "invalid delete id None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6bnVsbCwicmV2IjoyfV19"
+  },
+  {
+    "label": "invalid delete id '\\u202eevil'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6IuKArmV2aWwiLCJyZXYiOjJ9XX0"
+  },
+  {
+    "label": "invalid delete id 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Inh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eCIsInJldiI6Mn1dfQ"
+  },
+  {
+    "label": "invalid delete v 1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6MiwidiI6MX1dfQ"
+  },
+  {
+    "label": "invalid empty batch",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W119"
+  },
+  {
+    "label": "invalid twenty-one operations",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xIiwicmV2IjoyfSx7Im9wIjoiZGVsZXRlIiwiaWQiOiJtZWFsLTIiLCJyZXYiOjJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMyIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC00IiwicmV2IjoyfSx7Im9wIjoiZGVsZXRlIiwiaWQiOiJtZWFsLTUiLCJyZXYiOjJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtNiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC03IiwicmV2IjoyfSx7Im9wIjoiZGVsZXRlIiwiaWQiOiJtZWFsLTgiLCJyZXYiOjJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtOSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xMyIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xNyIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xOCIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0xOSIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0yMCIsInJldiI6Mn1dfQ"
+  },
+  {
+    "label": "invalid repeated upsert id",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9LHsib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid upsert delete same id",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMSIsInJldiI6Mn1dfQ"
+  },
+  {
+    "label": "invalid repeated delete id",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6Mn0seyJvcCI6ImRlbGV0ZSIsImlkIjoibWVhbC0yIiwicmV2IjozfV19"
+  },
+  {
+    "label": "invalid bare payload",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9"
+  },
+  {
+    "label": "invalid versioned legacy payload",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJ2IjoxLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9"
+  },
+  {
+    "label": "invalid versioned envelope",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJ2IjoyLCJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid extra top field",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJleHRyYSI6dHJ1ZSwiaXRlbXMiOlt7Im9wIjoidXBzZXJ0IiwiaWQiOiJtZWFsLTEiLCJuYW1lIjoi0KHRg9C_IPCfjbIiLCJrY2FsIjoxMjUuNSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "invalid items value None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6bnVsbH0"
+  },
+  {
+    "label": "invalid items value 'x'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6IngifQ"
+  },
+  {
+    "label": "invalid items value {}",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6e319"
+  },
+  {
+    "label": "invalid items value 1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6MX0"
+  },
+  {
+    "label": "invalid item type None",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W251bGxdfQ"
+  },
+  {
+    "label": "invalid item type True",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3RydWVdfQ"
+  },
+  {
+    "label": "invalid item type 1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6WzFdfQ"
+  },
+  {
+    "label": "invalid item type 'delete'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6WyJkZWxldGUiXX0"
+  },
+  {
+    "label": "invalid item type []",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W1tdXX0"
+  },
+  {
+    "label": "duplicate literal name",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsIm5hbWUiOiJyZXBsYWNlbWVudCJ9XX0"
+  },
+  {
+    "label": "duplicate escaped name",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsIm5hXHUwMDZkZSI6InJlcGxhY2VtZW50In1dfQ"
+  },
+  {
+    "label": "duplicate operation field",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsIm9wIjoiZGVsZXRlIn1dfQ"
+  },
+  {
+    "label": "duplicate items envelope",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XSwiaXRlbXMiOltdfQ"
+  },
+  {
+    "label": "duplicate escaped items envelope",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XSwiaXRcdTAwNjVtcyI6W119"
+  },
+  {
+    "label": "duplicate escaped identity",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9LHsib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtXHUwMDMxIiwicmV2IjoyfV19"
+  },
+  {
+    "label": "invalid exponential revision",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MmUwfV19"
+  },
+  {
+    "label": "invalid delete exponential revision",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJkZWxldGUiLCJpZCI6Im1lYWwtMiIsInJldiI6MmUwfV19"
+  },
+  {
+    "label": "invalid duplicate revision",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCIsInJldiI6MSwicmV2IjoyfV19"
+  },
+  {
+    "label": "invalid trailing comma",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9LF19"
+  },
+  {
+    "label": "invalid trailing second object",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX17fQ"
+  },
+  {
+    "label": "invalid unpaired surrogate",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiJcdWQ4MDAiLCJrY2FsIjoxMjUuNSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "invalid nonfinite exponent",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjFlOTk5LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid extra nesting",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOnsibmVzdGVkIjoxfSwidGltZSI6IjIwMjAtMDEtMTVUMTI6MzQ6NTYrMDM6MDAifV19"
+  },
+  {
+    "label": "invalid recursive bomb",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#W1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbMF1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXQ"
+  },
+  {
+    "label": "invalid long token",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiJ4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4Iiwia2NhbCI6MTI1LjUsInRpbWUiOiIyMDIwLTAxLTE1VDEyOjM0OjU2KzAzOjAwIn1dfQ"
+  },
+  {
+    "label": "invalid overlong decoded bytes",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg"
+  },
+  {
+    "label": "invalid base64url or UTF-8 'A'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#A"
+  },
+  {
+    "label": "invalid base64url or UTF-8 'abc='",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#abc="
+  },
+  {
+    "label": "invalid base64url or UTF-8 'ab+c'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#ab+c"
+  },
+  {
+    "label": "invalid base64url or UTF-8 'ab/c'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#ab/c"
+  },
+  {
+    "label": "invalid base64url or UTF-8 'Zh'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#Zh"
+  },
+  {
+    "label": "invalid base64url or UTF-8 '_w'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#_w"
+  },
+  {
+    "label": "invalid base64url or UTF-8 'wyg'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#wyg"
+  },
+  {
+    "label": "invalid base64url or UTF-8 '7aCA'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#7aCA"
+  },
+  {
+    "label": "invalid base64url or UTF-8 '%65e30'",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#%65e30"
+  },
+  {
+    "label": "invalid base64url or UTF-8 ''",
+    "valid": false,
+    "url": "https://food.kukakur.ru/#"
+  },
+  {
+    "label": "invalid origin or path http://food.kukakur.ru/",
+    "valid": false,
+    "url": "http://food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid origin or path https://food.kukakur.ru.evil.example/",
+    "valid": false,
+    "url": "https://food.kukakur.ru.evil.example/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid origin or path https://user@food.kukakur.ru/",
+    "valid": false,
+    "url": "https://user@food.kukakur.ru/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid origin or path https://food.kukakur.ru:443/",
+    "valid": false,
+    "url": "https://food.kukakur.ru:443/#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid origin or path https://food.kukakur.ru/other",
+    "valid": false,
+    "url": "https://food.kukakur.ru/other#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  },
+  {
+    "label": "invalid origin or path https://food.kukakur.ru/?query=1",
+    "valid": false,
+    "url": "https://food.kukakur.ru/?query=1#eyJpdGVtcyI6W3sib3AiOiJ1cHNlcnQiLCJpZCI6Im1lYWwtMSIsIm5hbWUiOiLQodGD0L8g8J-NsiIsImtjYWwiOjEyNS41LCJ0aW1lIjoiMjAyMC0wMS0xNVQxMjozNDo1NiswMzowMCJ9XX0"
+  }
+]

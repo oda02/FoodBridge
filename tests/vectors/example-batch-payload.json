@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "op": "upsert",
+      "id": "example-oatmeal-20260911-001",
+      "name": "Овсянка с ягодами 🥣",
+      "kcal": 352.5,
+      "time": "2026-09-11T09:00:00+03:00",
+      "p": 12.4,
+      "f": 8.1,
+      "c": 54.0,
+      "fiber": 7.2,
+      "sugar": 9.6,
+      "saturatedFat": 1.8,
+      "sodiumMg": 125,
+      "meal": "breakfast"
+    },
+    {
+      "op": "upsert",
+      "id": "example-apple-20260911-002",
+      "name": "Яблоко",
+      "kcal": 80.0,
+      "p": 0.4,
+      "f": 0.2,
+      "c": 21.0,
+      "time": "2026-09-11T09:00:00+03:00",
+      "meal": "snack"
+    }
+  ]
+}
